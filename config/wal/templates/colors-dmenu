@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+dmenu_run -fn scientifica:size=8 -p "Run:" -sb "{color1}" -sf "{background}" -nb "{background}" -nf "{foreground}"

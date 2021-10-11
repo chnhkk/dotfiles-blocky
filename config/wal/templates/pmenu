@@ -1,0 +1,6 @@
+pmenu.background: {background}
+pmenu.foreground: {foreground}
+pmenu.selbackground: {color9}
+pmenu.selforeground: {color8}
+pmenu.border: {color1}
+pmenu.separator: {color3}

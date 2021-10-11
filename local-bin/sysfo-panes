@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+DISPLAY=:0
+source /etc/os-release
+
+wm() {
+    id="$(xprop -root -notype "_NET_SUPPORTING_WM_CHECK")"
+    id="${id##* }"
+    wm="$(xprop -id "$id" -notype -len "100" -f "_NET_WM_NAME" "8t")"
+    wm="${wm/*_NET_WM_NAME = }"
+    wm="${wm/\"}"
+    wm="${wm/\"*}"
+    wm="${wm,,}"
+    echo $wm
+}
+wm
+
+f=3 b=4
+for j in f b; do
+  for i in {0..7}; do
+    printf -v $j$i %b "\e[${!j}${i}m"
+  done
+done
+d=$'\e[1m'
+t=$'\e[0m'
+v=$'\e[7m'
+scheme=$'\e[33m'
+
+echo -e "\e[33muser\e[39m		\e[31m`whoami`\e[39m"
+echo -e "\e[33mdistro\e[39m		\e[34m$ID\e[39m"
+echo -e "\e[33mkernel\e[39m		\e[31m`uname -r`\e[39m"
+echo -e "\e[33mpackages\e[39m	\e[34m`pacman -Qq | wc -l`\e[39m"
+echo -e "\e[33mshell\e[39m		\e[31m`basename $SHELL`\e[39m"
+echo -e "\e[33mwm\e[39m		\e[34m$wm\e[39m"
+echo -e "\e[33muptime\e[39m		\e[34m`uptime -p | sed -e "s/^up //"`\e[39m"
+cat << EOF
+${scheme}scheme$t
+                $f1███$d▄$t  $f2███$d▄$t  $f3███$d▄$t  $f4███$d▄$t  $f5███$d▄$t  $f6███$d▄$t  $f7███$d▄$t  
+                $f1███$d█$t  $f2███$d█$t  $f3███$d█$t  $f4███$d█$t  $f5███$d█$t  $f6███$d█$t  $f7███$d█$t  
+                $f1███$d█$t  $f2███$d█$t  $f3███$d█$t  $f4███$d█$t  $f5███$d█$t  $f6███$d█$t  $f7███$d█$t  
+                $d$f1 ▀▀▀   $f2▀▀▀   $f3▀▀▀   $f4▀▀▀   $f5▀▀▀   $f6▀▀▀   $f7▀▀▀  
+EOF

@@ -1,0 +1,6 @@
+
+#!/bin/bash
+# Set solid color as background
+# hakkioktay
+[[ -d ~/.cache/setsolid ]] || mkdir ~/.cache/setsolid
+convert -size 32x32 canvas:"$1" ~/.cache/setsolid/solid.png && feh --bg-tile ~/.cache/setsolid/solid.png

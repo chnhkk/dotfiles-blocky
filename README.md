@@ -1,3 +1,3 @@
-# Blocky dotfile theme
+# Blocky
 -------------
 ![Screenshot!](Images/Screenshot.png)

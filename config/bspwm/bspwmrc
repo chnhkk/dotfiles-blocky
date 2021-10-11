@@ -1,0 +1,79 @@
+#! /bin/sh
+source ~/.cache/wal/colors.sh
+
+# Init stuff --------------------------------------------------
+
+# xgamma -gamma 0.8 &
+mpd
+sxhkd &
+dunst &
+bspc monitor -d 0 1 2 3 4 5 6 7 8 9
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & # provided by polkit-gnome
+
+# Looks -------------------------------------------------------
+
+bspc config border_width        3
+bspc config window_gap          15
+bspc config split_ratio          0.5
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config focus_follows_pointer true
+bspc config automatic_scheme alternate
+
+bspc config bottom_padding 0
+bspc config top_padding 0
+bspc config right_padding 0
+bspc config left_padding 0
+
+bspc config normal_border_color "$color0"
+bspc config focused_border_color "$color1"
+bspc config urgent_border_color "#CD2337"
+bspc config presel_border_color "$color1"
+
+# Personal settings -------------------------------------------
+
+# Settings for touchpad
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Disable While Typing Enabled" 0
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+
+# DPMS stuff
+xset s off
+xset -dpms
+xset s noblank
+
+# Cursor
+xsetroot -cursor_name left_ptr
+#python3 -m http.server --directory Technic/github/chanhakk.github.io/ 8181 &
+
+# Window states -----------------------------------------------
+
+bspc rule -a Gimp state=floating follow=on
+bspc rule -a St:float state=floating
+bspc rule -a Gcolor3 state=floating
+bspc rule -a Unity state=floating
+bspc rule -a Pavucontrol state=floating
+bspc rule -a "Minecraft Linux Launcher UI" state=floating
+bspc rule -a mcpelauncher-client state=floating
+bspc rule -a "Steam:Friends List" state=floating
+bspc rule -a "Lxappearance" state=floating
+
+# Startup things ----------------------------------------------
+
+~/.fehbg
+xrdb .Xresources
+~/.config/polybar/polybar.sh &
+
+trayer -l \
+--width 10 \
+--transparent true \
+--alpha 256 \
+--tint 0x000000 \
+--align left \
+--margin 75 \
+--distance 32 &
+
+picom -b --config ~/.config/picom.conf
+
+# Play startup sound
+paplay ~/.local/share/audio/ui/NFCSuccess.ogg

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# 5 11
+read -r X Y W H < <(slop -f "%x %y %w %h" -b 1 -t 0 -q)
+(( W /= 5 ))
+(( H /= 11 ))
+g=${W}x${H}+${X}+${Y}
+if [ "$1" == "perl6" ]; then
+    st -n float -g $g -e perl6
+else
+    st -n float -g $g
+fi

@@ -1,0 +1,3 @@
+[color]
+transbg = #bf{color0.strip}
+border = #ff{color1.strip}
